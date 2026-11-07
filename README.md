@@ -1,13 +1,13 @@
 # RgbdExtractor
 
-用 Stereo Any Video 获取 VR180 双目画面的深度图，并打包成可在 PC 串流到头显观看的深度视频（mp4 + 同名 json）。
-Turn VR180 stereo footage into a depth map with Stereo Any Video, then pack it into a depth-displacement video (mp4 + sibling json) which can be streamed to a head-mounted display from a PC.
+用 Stereo Any Video 获取 VR180 双目画面的深度图，并打包成可在 PC 串流到头显观看的深度视频（导出灰度深度mp4 + 同名json配置）。
+Turn VR180 stereo footage into a depth map with Stereo Any Video, then pack it into a depth-displacement video (export grayscale depth mp4 + JSON configuration with the same name) which can be streamed to a head-mounted display from a PC.
 
 视频立体模型按 20 帧滑窗推理，时间一致性由模型提供。
 The video stereo model runs inference on 20-frame sliding windows, and temporal consistency comes from the model itself.
 
-导出一个10bit灰度视频用于存储左目的深度。
-Export a 10-bit grayscale video to store the depth of the left eye.
+导出一个10bit灰度视频用于存储左目的深度。另有json，控制远近、RGB视频路径等参数。
+Export a 10-bit grayscale video to store the depth of the left eye. Additionally, there is JSON for controlling parameters such as distance, RGB video path, etc.
 
 **深度视频播放请见 [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer)。**
 **For playback see [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer).**
