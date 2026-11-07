@@ -109,13 +109,6 @@ I tried flipping the left and right images, then obtaining the depth of the righ
    检查 Check:  `ffmpeg -hide_banner -encoders | Select-String 265`
 
 
-
-模型代码直接 import `core/stereoanyvideo.py`，不需要官方 README 里的 `pytorch3d`、`cub` 与 `pytorch_lightning`。
-The model is imported straight from `core/stereoanyvideo.py`, so `pytorch3d`, `cub` and `pytorch_lightning` from the official README are not needed.
-
-BF16 混合精度需要两处修补：`corr.py` 里 grid 与图像 dtype 对齐，`stereoanyvideo.py` 的凸上采样强制 FP32（unfoldNd 的分组 conv3d 在 BF16 下会溢出），仓库内已打好补丁。
-BF16 mixed precision needs two patches: the grid is cast to the image dtype in `corr.py`, and the convex upsample in `stereoanyvideo.py` is forced to FP32 (unfoldNd's grouped conv3d overflows in BF16); both are already applied here.
-
 6. 安装 xformer 和 triton，用于提速
 
    install xformer and triton to speed up
