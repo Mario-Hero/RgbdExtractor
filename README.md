@@ -9,7 +9,7 @@ The video stereo model runs inference on 20-frame sliding windows, and temporal 
 **深度视频播放请见 [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer)。**
 **For playback see [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer).**
 
-## 一个失败的尝试 A failed attempt
+## 这是一个失败的尝试 This is a failed attempt
 
 在观看VR180 3D视频的时候，相信大家都注意到了，如果头部在roll方向旋转（也就是歪头），近处的画面会发生重叠，导致观感下降。并且VR180是不能前后左右移动的，也就是只有3dof，没有6dof。所以为了进一步提高沉浸感，最近开始流行一种4DGS的视频，可以在空间中自由移动，也可以随意歪头。
 
@@ -25,7 +25,7 @@ The video stereo model runs inference on 20-frame sliding windows, and temporal 
 
 我又尝试左右颠倒，再获取右眼的深度，合并成一个视频。右眼模糊的问题是解决了，但是两个眼睛看到的深度没有对齐，导致在移动头部时，会轻微感觉左右眼不重叠。
 
-**总之，无论单目还是双目深度，跟原本的VR180版本相比，属于是劣化，稍微移动头部就会感觉近处画面拉丝。**
+**总之，该项目的无论单目还是双目深度，跟原本的VR180版本相比，属于是劣化，稍微移动头部就会感觉近处画面拉丝。**
 
 When watching VR180 3D videos, I believe everyone has noticed that if the head rotates in the roll direction (i.e., tilting the head), the nearby images will overlap, resulting in a diminished viewing experience. Moreover, VR180 does not allow for movement in the forward, backward, left, and right directions, meaning it only has 3 degrees of freedom (3dof) instead of 6 degrees of freedom (6dof). Therefore, to further enhance the immersion experience, a type of 4DGS video has recently become popular, allowing for free movement in space and the ability to tilt the head as desired.
 
