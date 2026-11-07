@@ -94,6 +94,26 @@ I tried flipping the left and right images, then obtaining the depth of the righ
    
    如果depth_anything权重下载不下来，可以用这个`https://hf-mirror.com/depth-anything/Video-Depth-Anything-Small/resolve/main/video_depth_anything_vits.pth`，下载到`third_party\stereoanyvideo\models\Video-Depth-Anything\checkpoints\video_depth_anything_vits.pth`
 
+3. 应用 BF16 推理补丁：把 `patch/models/core/` 下的两个文件覆盖到 `third_party/stereoanyvideo/models/core/`。
+
+   Apply the BF16 inference patches: copy the two files under `patch/models/core/` over `third_party/stereoanyvideo/models/core/`.
+
+   `corr.py`：`F.grid_sample` 的 grid 必须与图像同 dtype，否则 BF16 下报 `expected scalar type BFloat16 but found Float`。
+
+   `corr.py`: the grid of `F.grid_sample` must match the image dtype, otherwise BF16 raises `expected scalar type BFloat16 but found Float`.
+
+   `stereoanyvideo.py`：`convex_upsample_3D` 的凸组合强制 FP32，因为 `unfoldNd` 的分组 conv3d 在 BF16/FP16 下会溢出成垃圾值，污染 flow 并让整条 GRU 迭代链崩掉。
+
+   `stereoanyvideo.py`: the convex combination in `convex_upsample_3D` is forced to FP32, because `unfoldNd`'s grouped conv3d overflows in BF16/FP16, corrupting the flow and collapsing the whole GRU chain.
+
+   可选：若显卡 BF16 有问题，给 `process_video.py` 加 `--no-amp` 退回纯 FP32，此时两个补丁不再起作用。
+
+   Optional: if the GPU's BF16 is unstable, pass `--no-amp` to `process_video.py` to fall back to plain FP32; the two patches then become no-ops.
+
+   模型代码直接 `import .../core/stereoanyvideo.py`，因此不需要官方 README 里的 pytorch3d、cub 与 pytorch_lightning。
+
+   The model is imported straight from `core/stereoanyvideo.py`, so pytorch3d, cub and pytorch_lightning from the official README are not needed.
+
 4. 下载[主权重](https://drive.google.com/drive/folders/1c7L065dcBWhCYYjWYo2edGOG605PnpXv)到 `weights/StereoAnyVideo_MIX.pth`
 
    Download the [main checkpoint](https://drive.google.com/drive/folders/1c7L065dcBWhCYYjWYo2edGOG605PnpXv) to `weights/StereoAnyVideo_MIX.pth`
