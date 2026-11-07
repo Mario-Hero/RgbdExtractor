@@ -23,9 +23,9 @@ The video stereo model runs inference on 20-frame sliding windows, and temporal 
 
 而且这种方式，把双目视频转换成了左边单目+深度，那右边的RGB信息不就丢失了？假如左眼对齐原来的左眼视角，那右眼观看的画面必定会偏移，产生拉丝。
 
-我又尝试左右颠倒，再获取右眼的深度，合并成一个视频。右眼模糊的问题是解决了，但是两个眼睛看到的深度没有对齐，导致在移动头部时，会轻微感觉左右眼不重叠。
+我又尝试左右颠倒，再获取右眼的深度，合并成一个视频。右眼模糊的问题是解决了，但是两个眼睛看到的深度没有对齐，不移动头就没问题，一旦移动头部，就会轻微感觉左右眼不重叠并且出现拉丝。
 
-**总之，该项目的无论单目还是双目深度，跟原本的VR180版本相比，属于是劣化，稍微移动头部就会感觉近处画面拉丝。**
+**总之，该项目的无论单目还是双目深度，跟原本的VR180版本相比，是劣化，稍微移动头部就会感觉近处画面拉丝。**
 
 When watching VR180 3D videos, I believe everyone has noticed that if the head rotates in the roll direction (i.e., tilting the head), the nearby images will overlap, resulting in a diminished viewing experience. Moreover, VR180 does not allow for movement in the forward, backward, left, and right directions, meaning it only has 3 degrees of freedom (3dof) instead of 6 degrees of freedom (6dof). Therefore, to further enhance the immersion experience, a type of 4DGS video has recently become popular, allowing for free movement in space and the ability to tilt the head as desired.
 
@@ -39,9 +39,10 @@ For the storage of the depth map, I used an upper and lower limit, logarithm, an
 
 Moreover, this method converts the binocular video into left monocular + depth, doesn't that mean the RGB information on the right side will be lost? If the left eye aligns with the original left eye view, the image viewed by the right eye will inevitably be shifted, resulting in streaking.
 
-I tried flipping the image horizontally and obtaining the depth for the right eye, then merging them into one video. The issue of blurring in the right eye was resolved, but the depths seen by the two eyes were not aligned, resulting in a slight sensation of misalignment between the left and right eyes when moving the head.
+I tried flipping the left and right images, then obtaining the depth of the right eye, and merging them into one video. The issue of blurring in the right eye was resolved, but the depths seen by the two eyes were not aligned. If I didn't move my head, everything was fine, but once I moved it, I could slightly feel that the left and right eyes did not overlap and there was a pulling sensation.
 
 **In summary, whether it's monocular or binocular depth, compared to the original VR180 version, it's a downgrade. Even a slight movement of the head can cause the near image to appear blurry.**
+
 
 ## 项目结构 Layout
 - `sav_runner.py`：模型加载、滑窗推理、球面视差→距离换算
