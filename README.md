@@ -13,7 +13,7 @@ The video stereo model runs inference on 20-frame sliding windows, and temporal 
 
 在观看VR180 3D视频的时候，相信大家都注意到了，如果头部在roll方向旋转（也就是歪头），近处的画面会发生重叠，导致观感下降。并且VR180是不能前后左右移动的，也就是只有3dof，没有6dof。所以为了进一步提高沉浸感，最近开始流行一种4DGS的视频，可以在空间中自由移动，也可以随意歪头。
 
-但是这种视频需要非常多相机才能拍摄，普通人根本没法拍。如果能把VR180 3D视频转成4DGS那就好了。从双目图像获取深度的研究已经很成熟了（甚至从2d图像获取深度也有了），但是双目转4dgs可能数据还是太稀疏了，我没有这个技术，留待下个项目尝试吧。
+但是这种视频需要非常多相机才能拍摄，普通人根本没法拍。如果能把VR180 3D视频转成4DGS那就好了。从双目图像获取深度的研究已经很成熟了（甚至从2d图像获取深度也有了），单目转4dgs的也有，但是双目转4dgs的确实没有。
 
 所以我就退而求其次，用了比较经典的球壳+凹凸的办法播放RGB+深度画面。双目深度获取模型选的2025年的Stereo Any Video，这个时域稳定性比较好。2026年的c-fast-foundationstereo速度挺快的，但是时域不稳定。Stereo Any Video要输入许多帧用于滑动窗口，会导致显存占用过大，目前我用的是640x640分辨率，20帧滑动窗口，12G显存够用。
 
@@ -29,7 +29,7 @@ The video stereo model runs inference on 20-frame sliding windows, and temporal 
 
 When watching VR180 3D videos, I believe everyone has noticed that if the head rotates in the roll direction (i.e., tilting the head), the nearby images will overlap, resulting in a diminished viewing experience. Moreover, VR180 does not allow for movement in the forward, backward, left, and right directions, meaning it only has 3 degrees of freedom (3dof) instead of 6 degrees of freedom (6dof). Therefore, to further enhance the immersion experience, a type of 4DGS video has recently become popular, allowing for free movement in space and the ability to tilt the head as desired.
 
-However, capturing such videos requires a large number of cameras, which is simply beyond the reach of ordinary people. It would be great if VR180 3D videos could be converted into 4DGS. Research on obtaining depth from binocular images has already matured (even depth from 2D images has been achieved), but the data may still be too sparse for converting binocular images into 4DGS. I don't have this technology, so I'll leave it to the next project to try.
+However, such videos require a large number of cameras to shoot, which is simply beyond the reach of ordinary people. It would be great if VR180 3D videos could be converted into 4DGS. Research on obtaining depth from binocular images has already matured (even depth obtained from 2D images has been achieved), and there are also methods for converting monocular images into 4DGS, but there is indeed no method for converting binocular images into 4DGS.
 
 So I settled for the next best thing and used a classic method of combining a spherical shell with bump mapping to play back RGB+depth images. The binocular depth acquisition model I chose is Stereo Any Video from 2025, which has good temporal stability. The c-fast-foundationstereo from 2026 is quite fast, but it lacks temporal stability. Stereo Any Video requires inputting many frames for sliding window purposes, which can lead to excessive memory usage. Currently, I am using a resolution of 640x640, with a sliding window of 20 frames, and 12GB of VRAM is sufficient.
 
