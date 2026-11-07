@@ -6,6 +6,9 @@ Turn VR180 stereo footage into a depth map with Stereo Any Video, then pack it i
 视频立体模型按 20 帧滑窗推理，时间一致性由模型提供。
 The video stereo model runs inference on 20-frame sliding windows, and temporal consistency comes from the model itself.
 
+导出一个10bit灰度视频用于存储左目的深度。
+Export a 10-bit grayscale video to store the depth of the left eye.
+
 **深度视频播放请见 [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer)。**
 **For playback see [RgbdPlayer](https://github.com/Mario-Hero/RgbdPlayer).**
 
