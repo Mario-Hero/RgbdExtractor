@@ -1,0 +1,3 @@
+[submodule "third_party/stereoanyvideo"]
+	path = third_party/stereoanyvideo
+	url = https://github.com/TomTomTommi/stereoanyvideo
